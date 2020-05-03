@@ -1,15 +1,15 @@
 variable "key_name" {
-  default = "mykey-test-1"
+  default = "Chaitanya-aws-key"
 }
 
 variable "pvt_key" {
-  default = "/root/.ssh/amit-personal-aws.pem"
+  default = "/root/.ssh/Chaitanya-aws-key.pem"
 }
 
-variable "us-east-zones" {
-  default = ["us-east-1a", "us-east-1b"]
+variable "up-south-zones" {
+  default = ["ap-south-1a", "ap-south-1b"]
 }
 
 variable "sg-id" {
-  default = "sg-0eec038018ea2902d"
+  default = "sg-0dfd0806c1d455eee"
 }
