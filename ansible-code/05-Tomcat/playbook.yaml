@@ -1,0 +1,36 @@
+---
+
+- hosts: petclinic
+  name: My Petclinic Deployment
+  become: yes
+  vars: 
+    doc_tomcat: "/opt/SP/apps"
+ 
+  tasks: 
+  - name: Tomcat Home Dir
+    file: path={{doc_tomcat}}/tomcat state=directory
+
+  - name: Install Default Java 1.8
+    apt: name=default-jdk state=present
+
+  - name: Download Tomcat Tarball
+    get_url: url="http://apachemirror.wuchna.com/tomcat/tomcat-8/v8.5.54/bin/apache-tomcat-8.5.54.tar.gz"  dest={{doc_tomcat}}/tomcat.tar.gz mode=0755
+
+  - name: Extract Tomcat Tarball
+    command: "tar zxf {{doc_tomcat}}/tomcat.tar.gz -C {{doc_tomcat}}/tomcat --strip-components 1"
+ 
+  - name: Delete petclinic file/directory wildcard
+    shell: rm -rf {{doc_tomcat}}/tomcat/webapps/petclinic*
+ 
+  - name: Deploy Jenkins Index Page
+    copy: src=files/petclinic.war dest={{doc_tomcat}}/tomcat/webapps
+    notify: 
+    - Restart Tomcat
+
+
+  handlers:
+  - name: Restart Tomcat
+    #shell: "nohup sh /opt/SP/apps/tomcat/bin/catalina.sh stop"
+    shell: "nohup sh /opt/SP/apps/tomcat/bin/catalina.sh start"
+
+
