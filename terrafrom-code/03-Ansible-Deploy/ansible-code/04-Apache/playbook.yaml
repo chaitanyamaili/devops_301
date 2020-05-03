@@ -5,7 +5,7 @@
   become: yes
   vars: 
     doc_root: "/var/www/html"
-    username: "haitanya Maili
+    username: "Chaitanya Maili"
  
   tasks: 
   - name: Install Apache2 Packages
