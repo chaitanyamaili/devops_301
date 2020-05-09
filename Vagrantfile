@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
         ctl.vm.hostname = "kube-master"
         ctl.vm.network "private_network", ip: "172.31.0.10"
         ctl.vm.provider "virtualbox" do |vb|
-          vb.memory = 2048
+          vb.memory = 7168
         end
   end
 
